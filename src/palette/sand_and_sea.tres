@@ -1,0 +1,14 @@
+[gd_resource type="ColorPalette" script_class="Palette" format=3 uid="uid://biqesfk3r0pf6"]
+
+[ext_resource type="Script" uid="uid://di7r32h68emue" path="res://src/palette/palette.gd" id="1_c1uei"]
+
+[resource]
+script = ExtResource("1_c1uei")
+sea = Color(0.23137255, 0.5568628, 0.64705884, 1)
+land = Color(0.9254902, 0.8509804, 0.627451, 1)
+trail = Color(0.9490196, 0.41960785, 0.35686275, 1)
+player = Color(0.14901961, 0.19607843, 0.24705882, 1)
+enemy = Color(0.48235294, 0.1764706, 0.37254903, 1)
+background = Color(0.14117648, 0.1882353, 0.23529412, 1)
+text = Color(0.99215686, 0.9647059, 0.8901961, 1)
+text_outline = Color(0.12156863, 0.16470589, 0.20784314, 1)

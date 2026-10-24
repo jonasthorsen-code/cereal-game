@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://i7yipg0lroeh"]
+
+[ext_resource type="Script" uid="uid://c2wv1yron6mv2" path="res://src/map/map.gd" id="1_4xfga"]
+[ext_resource type="Script" uid="uid://bhc0tdpmca08w" path="res://src/map/map_view.gd" id="3_4hjbm"]
+
+[node name="Map" type="Node2D" unique_id=233749821 node_paths=PackedStringArray("view")]
+script = ExtResource("1_4xfga")
+view = NodePath("MapView")
+
+[node name="MapView" type="Node2D" parent="." unique_id=1715430695]
+script = ExtResource("3_4hjbm")

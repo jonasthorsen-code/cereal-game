@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://di4qssom4xkwx"]
+
+[ext_resource type="Script" uid="uid://bgy6hoe5qeaxy" path="res://src/hud/hud.gd" id="1_ahhtf"]
+[ext_resource type="Script" uid="uid://dah72xhtwxej1" path="res://src/hud/stats_label.gd" id="2_oo0fn"]
+
+[node name="HUD" type="CanvasLayer" unique_id=336010015]
+process_mode = 3
+script = ExtResource("1_ahhtf")
+
+[node name="StatsLabel" type="Label" parent="." unique_id=1944664693]
+offset_right = 40.0
+offset_bottom = 23.0
+script = ExtResource("2_oo0fn")
+
+[node name="MessageLabel" type="Label" parent="." unique_id=1031017836]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1

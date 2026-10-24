@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://b2texv7jqkx1i"]
+
+[ext_resource type="Script" uid="uid://bkdmofy6dtwsr" path="res://src/main/main.gd" id="1_3wy1v"]
+[ext_resource type="Script" uid="uid://di7r32h68emue" path="res://src/palette/palette.gd" id="2_2nke2"]
+[ext_resource type="PackedScene" uid="uid://i7yipg0lroeh" path="res://src/map/map.tscn" id="2_kfbq2"]
+[ext_resource type="PackedScene" uid="uid://b5lenf4vurn40" path="res://src/actors/player/player.tscn" id="3_4dugh"]
+[ext_resource type="ColorPalette" uid="uid://h4ltbf0rt8ov" path="res://src/palette/lagoon.tres" id="3_km7bn"]
+[ext_resource type="PackedScene" uid="uid://bd6impu17pu6n" path="res://src/actors/enemy/enemy.tscn" id="4_67ri8"]
+[ext_resource type="ColorPalette" uid="uid://dd4xdnw1bfakt" path="res://src/palette/night.tres" id="4_erw1m"]
+[ext_resource type="PackedScene" uid="uid://di4qssom4xkwx" path="res://src/hud/hud.tscn" id="5_grrlh"]
+[ext_resource type="ColorPalette" uid="uid://biqesfk3r0pf6" path="res://src/palette/sand_and_sea.tres" id="5_w0wra"]
+
+[node name="Main" type="Node2D" unique_id=1944975571 node_paths=PackedStringArray("camera", "hud", "map", "player", "enemies")]
+script = ExtResource("1_3wy1v")
+camera = NodePath("Camera2D")
+hud = NodePath("HUD")
+map = NodePath("Map")
+palettes = Array[ExtResource("2_2nke2")]([ExtResource("3_km7bn"), ExtResource("5_w0wra"), ExtResource("4_erw1m")])
+player = NodePath("Player")
+enemies = NodePath("Enemies")
+
+[node name="Map" parent="." unique_id=233749821 instance=ExtResource("2_kfbq2")]
+border = 3
+
+[node name="Player" parent="." unique_id=1129725303 node_paths=PackedStringArray("map") instance=ExtResource("3_4dugh")]
+map = NodePath("../Map")
+steps_per_second = 15
+start_cell = Vector2i(1, 58)
+
+[node name="Enemies" type="Node2D" parent="." unique_id=787009893]
+
+[node name="Enemy" parent="Enemies" unique_id=2097217473 node_paths=PackedStringArray("map") instance=ExtResource("4_67ri8")]
+map = NodePath("../../Map")
+steps_per_second = 15
+start_cell = Vector2i(60, 40)
+
+[node name="HUD" parent="." unique_id=336010015 instance=ExtResource("5_grrlh")]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1983117891]
+position = Vector2(320, 240)

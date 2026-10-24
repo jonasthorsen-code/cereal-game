@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://bd6impu17pu6n"]
+
+[ext_resource type="Script" uid="uid://blilwbes0s34v" path="res://src/actors/enemy/enemy.gd" id="1_7p1mj"]
+
+[node name="Enemy" type="Node2D" unique_id=2097217473]
+script = ExtResource("1_7p1mj")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1225837340]
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
