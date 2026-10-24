@@ -26,6 +26,11 @@ func _ready() -> void:
 	hud.set_target(win_percent)
 	_apply_palette()
 
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("next_palette"):
+		_palette_index = (_palette_index + 1) % palettes.size()
+		_apply_palette()
+
 func _on_trail_completed() -> void:
 	if map.is_burning():
 		map.clear_trail()

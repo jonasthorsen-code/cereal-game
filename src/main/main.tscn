@@ -18,6 +18,8 @@ map = NodePath("Map")
 palettes = Array[ExtResource("2_2nke2")]([ExtResource("3_km7bn"), ExtResource("5_w0wra"), ExtResource("4_erw1m")])
 player = NodePath("Player")
 enemies = NodePath("Enemies")
+lives = null
+win_percent = null
 
 [node name="Map" parent="." unique_id=233749821 instance=ExtResource("2_kfbq2")]
 border = 3
