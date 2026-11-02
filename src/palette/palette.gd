@@ -8,3 +8,4 @@ class_name Palette extends Resource
 @export var background: Color
 @export var text: Color
 @export var text_outline: Color
+@export var parry: Color

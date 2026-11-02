@@ -44,6 +44,9 @@ func _physics_process(delta: float) -> void:
 func set_palette(p: Palette) -> void:
 	view.set_palette(p)
 
+func set_parry_highlight(on: bool) -> void:
+	view.set_parry_highlight(on)
+
 func get_pixel_size() -> Vector2:
 	return view.get_pixel_size()
 

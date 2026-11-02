@@ -10,8 +10,11 @@ func reset() -> void:
 	super.reset()
 	direction = start_direction
 
+func deflect() -> void:
+	_bounce(GridData.Cell.TRAIL)
+
 func _step() -> void:
-	_bounce()
+	_bounce(GridData.Cell.LAND)
 	var next := cell + direction
 	match map.get_cell_type(next):
 		GridData.Cell.TRAIL: 
@@ -21,10 +24,10 @@ func _step() -> void:
 		GridData.Cell.LAND:
 			pass
 
-func _bounce() -> void:
-	var blocked_x := map.get_cell_type(cell + Vector2i(direction.x, 0)) == GridData.Cell.LAND
-	var blocked_y := map.get_cell_type(cell + Vector2i(0, direction.y)) == GridData.Cell.LAND
-	var blocked_diag := map.get_cell_type(cell + direction) == GridData.Cell.LAND
+func _bounce(cell_type: GridData.Cell) -> void:
+	var blocked_x := map.get_cell_type(cell + Vector2i(direction.x, 0)) == cell_type
+	var blocked_y := map.get_cell_type(cell + Vector2i(0, direction.y)) == cell_type
+	var blocked_diag := map.get_cell_type(cell + direction) == cell_type
 	if blocked_x:
 		direction.x = -direction.x
 	if blocked_y:

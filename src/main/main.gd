@@ -11,6 +11,7 @@ class_name Main extends Node2D
 
 var game_over := false
 var _palette_index := 0
+var _palette: Palette
 
 func _ready() -> void:
 	camera.position = map.get_pixel_size() / 2
@@ -19,12 +20,17 @@ func _ready() -> void:
 	map.area_claimed.connect(_on_area_claimed)
 	map.burn_reached_head.connect(_lose_life)
 	for enemy: Enemy in enemies.get_children():
-		enemy.hit_trail.connect(_on_enemy_hit_trail)
+		enemy.hit_trail.connect(_on_enemy_hit_trail.bind(enemy))
 	hud.restart_requested.connect(_on_restart_requested)
 	hud.set_lives(lives)
 	hud.set_progress(0.0)
 	hud.set_target(win_percent)
 	_apply_palette()
+
+func _process(_delta: float) -> void:
+	var armed := player.is_parry_open()
+	player.modulate = _palette.parry if armed else _palette.player
+	map.set_parry_highlight(armed)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("next_palette"):
@@ -57,8 +63,11 @@ func _on_area_claimed(percent: float) -> void:
 	if percent >= win_percent:
 		_end_game("You win!")
 
-func _on_enemy_hit_trail(_cell: Vector2i) -> void:
-	map.burn_trail(_cell)
+func _on_enemy_hit_trail(_cell: Vector2i, enemy: Enemy) -> void:
+	if (player.try_parry()):
+		enemy.deflect()
+	else:
+		map.burn_trail(_cell)
 
 func _end_game(text: String) -> void:
 	if game_over: return
@@ -71,10 +80,10 @@ func _on_restart_requested() -> void:
 	get_tree().reload_current_scene()
 
 func _apply_palette() -> void:
-	var p := palettes[_palette_index]
-	map.set_palette(p)
-	hud.set_palette(p)
-	player.modulate = p.player
+	_palette = palettes[_palette_index]
+	map.set_palette(_palette)
+	hud.set_palette(_palette)
+	player.modulate = _palette.player
 	for enemy in enemies.get_children():
-		enemy.modulate = p.enemy
-	RenderingServer.set_default_clear_color(p.background)
+		enemy.modulate = _palette.enemy
+	RenderingServer.set_default_clear_color(_palette.background)

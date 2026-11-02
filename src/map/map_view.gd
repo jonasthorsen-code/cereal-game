@@ -4,6 +4,7 @@ class_name MapView extends Node2D
 
 var _grid: GridData
 var _palette: Palette
+var _parry_highlight := false
 
 func bind(grid: GridData) -> void:
 	_grid = grid
@@ -19,6 +20,12 @@ func cell_to_world(cell: Vector2i) -> Vector2:
 
 func get_pixel_size() -> Vector2:
 	return Vector2(_grid.width, _grid.height) * cell_size
+
+func set_parry_highlight(on: bool) -> void:
+	if on == _parry_highlight:
+		return
+	_parry_highlight = on
+	queue_redraw()
 
 func _draw() -> void:
 	if _grid == null or _palette == null:
@@ -40,5 +47,5 @@ func _color_of(type: GridData.Cell) -> Color:
 		GridData.Cell.LAND:
 			return _palette.land
 		GridData.Cell.TRAIL:
-			return _palette.trail
+			return _palette.parry if _parry_highlight else _palette.trail
 	return _palette.sea

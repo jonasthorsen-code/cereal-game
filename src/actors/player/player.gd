@@ -13,12 +13,19 @@ const DIRECTIONS := {
 var direction := Vector2i.ZERO
 var queued := Vector2i.ZERO
 var wait_for_release := false
+var parry := Parry.new()
 
 func reset() -> void:
 	super.reset()
 	direction = Vector2i.ZERO
 	queued = Vector2i.ZERO
 	wait_for_release = false
+
+func try_parry() -> bool:
+	return parry.consume(Time.get_ticks_msec())
+
+func is_parry_open() -> bool:
+	return parry.is_open(Time.get_ticks_msec())
 
 func _unhandled_input(event: InputEvent) -> void:
 	for action in DIRECTIONS:
@@ -30,6 +37,8 @@ func _unhandled_input(event: InputEvent) -> void:
 			else:
 				queued = new
 				wait_for_release = false
+	if event.is_action_pressed("parry") and _is_drawing():
+		parry.press(Time.get_ticks_msec())
 
 func _step() -> void:
 	if not _is_drawing():
@@ -55,6 +64,8 @@ func _step() -> void:
 		GridData.Cell.TRAIL:
 			died.emit()
 		GridData.Cell.SEA:
+			if not _is_drawing():
+				parry.new_trip()
 			map.add_trail(next)
 			_move_to(next)
 		GridData.Cell.LAND:
