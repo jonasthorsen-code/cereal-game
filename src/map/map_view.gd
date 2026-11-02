@@ -2,9 +2,12 @@ class_name MapView extends Node2D
 
 @export var cell_size := 8
 
+const NO_HEAD := Vector2i(-1, -1)
+
 var _grid: GridData
 var _palette: Palette
 var _parry_highlight := false
+var _head := NO_HEAD
 
 func bind(grid: GridData) -> void:
 	_grid = grid
@@ -35,11 +38,17 @@ func _draw() -> void:
 	for x in _grid.width:
 		for y in _grid.height:
 			var cell := Vector2i(x, y)
+			if cell == _head:
+				continue
 			var type := _grid.get_cell(cell)
 			if type != GridData.Cell.SEA:
 				draw_rect(Rect2(Vector2(cell) * cell_size, square), _color_of(type))
 
-func _on_cell_changed(_cell: Vector2i) -> void:
+func _on_cell_changed(cell: Vector2i) -> void:
+	if _grid.get_cell(cell) == GridData.Cell.TRAIL:
+		_head = cell
+	elif cell == _head:
+		_head = NO_HEAD
 	queue_redraw()
 
 func _color_of(type: GridData.Cell) -> Color:
