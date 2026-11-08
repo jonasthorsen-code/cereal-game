@@ -19,7 +19,9 @@ Add an entry when you add the item. Keep the license text for anything that requ
 
 | Asset | Author | License | Source | Used in | Modified? |
 |---|---|---|---|---|---|
-| None yet | | | | | |
+| icon.svg (Godot template icon, based on the Godot logo) | Andrea Calabró | CC BY 4.0 | https://github.com/godotengine/godot (LOGO_LICENSE.txt) | Project icon | No |
+
+Replace the project icon with your own and remove this entry if you no longer use it.
 
 ## Audio
 
@@ -32,6 +34,8 @@ Add an entry when you add the item. Keep the license text for anything that requ
 | Font | Author | License | Source | Used in |
 |---|---|---|---|---|
 | None yet | | | | |
+
+The GUT addon bundles its own fonts (see `addons/gut/fonts/OFL.txt`). They are only used by the test panel in the editor.
 
 ## Original work
 
